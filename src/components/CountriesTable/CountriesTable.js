@@ -104,7 +104,7 @@ const CountriesTable = ({ countries }) => {
       </div>
 
       {orderedCountries.map((country) => (
-        <Link href={`/country/${country.alpha3Code}`} key={country.name}>
+        <a href={`/country/${country.alpha3Code}`} key={country.name}>
           <div className={styles.row}>
             <div className={styles.flag}>
               <img src={country.flag} alt={country.name} />
@@ -117,7 +117,7 @@ const CountriesTable = ({ countries }) => {
 
             <div className={styles.gini}>{country.gini || 0} %</div>
           </div>
-        </Link>
+        </a>
       ))}
     </div>
   );
