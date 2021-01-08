@@ -7,14 +7,7 @@ import styles from "./Layout.module.css";
 const Layout = ({ children, title = "World Ranks" }) => {
   const [theme, setTheme] = useState("light");
 
-  useEffect(() => {
-    document.documentElement.setAttribute(
-      "data-theme",
-      localStorage.getItem("theme")
-    );
-
-    setTheme(localStorage.getItem("theme"));
-  }, []);
+  
 
   const switchTheme = () => {
     if (theme === "light") {
@@ -23,7 +16,14 @@ const Layout = ({ children, title = "World Ranks" }) => {
       saveTheme("light");
     }
   };
+useEffect(() => {
+    document.documentElement.setAttribute(
+      "data-theme",
+      localStorage.getItem("theme")
+    );
 
+    setTheme(localStorage.getItem("theme"));
+  }, []);
   const saveTheme = (theme) => {
     setTheme(theme);
     localStorage.setItem("theme", theme);
