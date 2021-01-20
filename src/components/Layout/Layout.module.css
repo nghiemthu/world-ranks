@@ -16,6 +16,10 @@
   margin-bottom: 32px;
 }
 
+.logo {
+  cursor: pointer;
+}
+
 .footer {
   margin-top: 32px;
   text-align: center;

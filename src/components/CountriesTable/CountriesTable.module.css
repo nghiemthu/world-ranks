@@ -56,6 +56,8 @@
   font-weight: 500;
 
   transition: transform 200ms ease-in-out, box-shadow 200ms ease-in-out;
+
+  cursor: pointer;
 }
 
 .row:hover {
