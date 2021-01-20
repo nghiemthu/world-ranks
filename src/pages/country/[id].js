@@ -25,8 +25,6 @@ const Country = ({ country }) => {
     getBorders();
   }, []);
 
-  console.log(borders);
-
   return (
     <Layout title={country.name}>
       <div className={styles.container}>
@@ -96,7 +94,10 @@ const Country = ({ country }) => {
 
               <div className={styles.details_panel_borders_container}>
                 {borders.map(({ flag, name }) => (
-                  <div className={styles.details_panel_borders_country}>
+                  <div
+                    className={styles.details_panel_borders_country}
+                    key={name}
+                  >
                     <img src={flag} alt={name}></img>
 
                     <div className={styles.details_panel_borders_name}>
