@@ -1,6 +1,7 @@
-import Link from 'next/link'
 import { KeyboardArrowDownRounded, KeyboardArrowUpRounded } from '@material-ui/icons'
+import Link from 'next/link'
 import { useState } from 'react'
+import { Country } from '../../types'
 import styles from './CountriesTable.module.css'
 
 const orderBy = (countries, value, direction) => {
@@ -35,9 +36,13 @@ const SortArrow = ({ direction }) => {
   }
 }
 
-const CountriesTable = ({ countries }) => {
-  const [direction, setDirection] = useState()
-  const [value, setValue] = useState()
+type CountriesTableProps = {
+  countries: Country[]
+}
+
+const CountriesTable = ({ countries }: CountriesTableProps) => {
+  const [direction, setDirection] = useState('')
+  const [value, setValue] = useState('')
 
   const orderedCountries = orderBy(countries, value, direction)
 
@@ -51,7 +56,7 @@ const CountriesTable = ({ countries }) => {
     }
   }
 
-  const setValueAndDirection = (value) => {
+  const setValueAndDirection = (value: string) => {
     switchDirection()
     setValue(value)
   }

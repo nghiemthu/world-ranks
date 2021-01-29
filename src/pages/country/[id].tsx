@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 import Layout from '../../components/Layout/Layout'
+import { Country } from '../../types'
 import styles from './Country.module.css'
 
-const getCountry = async (id) => {
+const getCountry = async (id: string) => {
   const res = await fetch(`https://restcountries.eu/rest/v2/alpha/${id}`)
 
   const country = await res.json()
@@ -10,7 +11,11 @@ const getCountry = async (id) => {
   return country
 }
 
-const Country = ({ country }) => {
+type CountryPage = {
+  country: Country
+}
+
+const CountryPage = ({ country }: CountryPage) => {
   const [borders, setBorders] = useState([])
 
   const getBorders = async () => {
@@ -97,11 +102,11 @@ const Country = ({ country }) => {
   )
 }
 
-export default Country
+export default CountryPage
 
 export const getStaticPaths = async () => {
   const res = await fetch('https://restcountries.eu/rest/v2/all')
-  const countries = await res.json()
+  const countries: Country[] = await res.json()
 
   const paths = countries.map((country) => ({
     params: { id: country.alpha3Code },

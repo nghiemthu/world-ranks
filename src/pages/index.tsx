@@ -1,11 +1,15 @@
-import Head from 'next/head'
 import { useState } from 'react'
 import CountriesTable from '../components/CountriesTable/CountriesTable'
 import Layout from '../components/Layout/Layout'
 import SearchInput from '../components/SearchInput/SearchInput'
 import styles from '../styles/Home.module.css'
+import { Country } from '../types'
 
-export default function Home({ countries }) {
+type HomeProps = {
+  countries: Country[]
+}
+
+export default function Home({ countries }: HomeProps) {
   const [keyword, setKeyword] = useState('')
 
   const filteredCountries = countries.filter(
@@ -38,8 +42,7 @@ export default function Home({ countries }) {
 
 export const getStaticProps = async () => {
   const res = await fetch('https://restcountries.eu/rest/v2/all')
-  const countries = await res.json()
-  console.log('countries', countries[0])
+  const countries: Country[] = await res.json()
 
   return {
     props: {
