@@ -20,38 +20,6 @@ type CountriesTableProps = {
   countries: Country[]
 }
 
-const orderBy = (countries: Country[], value: ColumnValue, direction: Direction) => {
-  if (direction === Direction.Ascending) {
-    return [...countries].sort((a, b) => (a[value] > b[value] ? 1 : -1))
-  }
-
-  if (direction === Direction.Descending) {
-    return [...countries].sort((a, b) => (a[value] > b[value] ? -1 : 1))
-  }
-
-  return countries
-}
-
-const SortArrow = ({ direction }) => {
-  if (!direction) {
-    return <></>
-  }
-
-  if (direction === Direction.Descending) {
-    return (
-      <div className={styles.heading_arrow}>
-        <KeyboardArrowDownRounded color="inherit" />
-      </div>
-    )
-  } else {
-    return (
-      <div className={styles.heading_arrow}>
-        <KeyboardArrowUpRounded color="inherit" />
-      </div>
-    )
-  }
-}
-
 const CountriesTable = ({ countries }: CountriesTableProps) => {
   const [direction, setDirection] = useState<Direction>()
   const [value, setValue] = useState<ColumnValue>()
@@ -123,6 +91,38 @@ const CountriesTable = ({ countries }: CountriesTableProps) => {
       ))}
     </div>
   )
+}
+
+const orderBy = (countries: Country[], value: ColumnValue, direction: Direction) => {
+  if (direction === Direction.Ascending) {
+    return [...countries].sort((a, b) => (a[value] > b[value] ? 1 : -1))
+  }
+
+  if (direction === Direction.Descending) {
+    return [...countries].sort((a, b) => (a[value] > b[value] ? -1 : 1))
+  }
+
+  return countries
+}
+
+const SortArrow = ({ direction }) => {
+  if (!direction) {
+    return <></>
+  }
+
+  if (direction === Direction.Descending) {
+    return (
+      <div className={styles.heading_arrow}>
+        <KeyboardArrowDownRounded color="inherit" />
+      </div>
+    )
+  } else {
+    return (
+      <div className={styles.heading_arrow}>
+        <KeyboardArrowUpRounded color="inherit" />
+      </div>
+    )
+  }
 }
 
 export default CountriesTable
