@@ -43,6 +43,7 @@
 }
 
 .row {
+  cursor: pointer;
   display: flex;
   padding: 20px;
 
