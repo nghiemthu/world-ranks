@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import Layout from '../../components/Layout/Layout'
-import { Country } from '../../types'
+import { Country } from '../../types/types'
 import styles from './Country.module.css'
 
 const getCountry = async (id: string) => {

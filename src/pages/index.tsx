@@ -3,7 +3,7 @@ import CountriesTable from '../components/CountriesTable/CountriesTable'
 import Layout from '../components/Layout/Layout'
 import SearchInput from '../components/SearchInput/SearchInput'
 import styles from '../styles/Home.module.css'
-import { Country } from '../types'
+import { Country } from '../types/types'
 
 type HomeProps = {
   countries: Country[]
