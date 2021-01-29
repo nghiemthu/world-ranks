@@ -4,12 +4,28 @@ import { useState } from 'react'
 import { Country } from '../../types/types'
 import styles from './CountriesTable.module.css'
 
-const orderBy = (countries, value, direction) => {
-  if (direction === 'asc') {
+enum ColumnValue {
+  Name = 'name',
+  Population = 'population',
+  Area = 'area',
+  Gini = 'gini',
+}
+
+enum Direction {
+  Ascending = 'asc',
+  Descending = 'desc',
+}
+
+type CountriesTableProps = {
+  countries: Country[]
+}
+
+const orderBy = (countries: Country[], value: ColumnValue, direction: Direction) => {
+  if (direction === Direction.Ascending) {
     return [...countries].sort((a, b) => (a[value] > b[value] ? 1 : -1))
   }
 
-  if (direction === 'desc') {
+  if (direction === Direction.Descending) {
     return [...countries].sort((a, b) => (a[value] > b[value] ? -1 : 1))
   }
 
@@ -21,7 +37,7 @@ const SortArrow = ({ direction }) => {
     return <></>
   }
 
-  if (direction === 'desc') {
+  if (direction === Direction.Descending) {
     return (
       <div className={styles.heading_arrow}>
         <KeyboardArrowDownRounded color="inherit" />
@@ -36,27 +52,23 @@ const SortArrow = ({ direction }) => {
   }
 }
 
-type CountriesTableProps = {
-  countries: Country[]
-}
-
 const CountriesTable = ({ countries }: CountriesTableProps) => {
-  const [direction, setDirection] = useState('')
-  const [value, setValue] = useState('')
+  const [direction, setDirection] = useState<Direction>()
+  const [value, setValue] = useState<ColumnValue>()
 
   const orderedCountries = orderBy(countries, value, direction)
 
   const switchDirection = () => {
     if (!direction) {
-      setDirection('desc')
-    } else if (direction === 'desc') {
-      setDirection('asc')
+      setDirection(Direction.Descending)
+    } else if (direction === Direction.Descending) {
+      setDirection(Direction.Ascending)
     } else {
       setDirection(null)
     }
   }
 
-  const setValueAndDirection = (value: string) => {
+  const setValueAndDirection = (value: ColumnValue) => {
     switchDirection()
     setValue(value)
   }
@@ -66,30 +78,30 @@ const CountriesTable = ({ countries }: CountriesTableProps) => {
       <div className={styles.heading}>
         <div className={styles.heading_flag}></div>
 
-        <button className={styles.heading_name} onClick={() => setValueAndDirection('name')}>
+        <button className={styles.heading_name} onClick={() => setValueAndDirection(ColumnValue.Name)}>
           <div>Name</div>
 
-          {value === 'name' && <SortArrow direction={direction} />}
+          {value === ColumnValue.Name && <SortArrow direction={direction} />}
         </button>
 
-        <button className={styles.heading_population} onClick={() => setValueAndDirection('population')}>
+        <button className={styles.heading_population} onClick={() => setValueAndDirection(ColumnValue.Population)}>
           <div>Population</div>
 
-          {value === 'population' && <SortArrow direction={direction} />}
+          {value === ColumnValue.Population && <SortArrow direction={direction} />}
         </button>
 
-        <button className={styles.heading_area} onClick={() => setValueAndDirection('area')}>
+        <button className={styles.heading_area} onClick={() => setValueAndDirection(ColumnValue.Area)}>
           <div>
             Area (km<sup style={{ fontSize: '0.5rem' }}>2</sup>)
           </div>
 
-          {value === 'area' && <SortArrow direction={direction} />}
+          {value === ColumnValue.Area && <SortArrow direction={direction} />}
         </button>
 
-        <button className={styles.heading_gini} onClick={() => setValueAndDirection('gini')}>
+        <button className={styles.heading_gini} onClick={() => setValueAndDirection(ColumnValue.Gini)}>
           <div>Gini</div>
 
-          {value === 'gini' && <SortArrow direction={direction} />}
+          {value === ColumnValue.Gini && <SortArrow direction={direction} />}
         </button>
       </div>
 
